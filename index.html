@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>[타마등불] 팀 대시보드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        background: #f2f4f6;
+        color: #191f28;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── 배경 ── */
+      .bg-dashboard {
+        background: #f2f4f6;
+        min-height: 100vh;
+        padding-bottom: 3rem;
+      }
+
+      /* ── 헤더 ── */
+      .header-wrap {
+        background: linear-gradient(
+          160deg,
+          #1a2f4e 0%,
+          #1e3a5f 55%,
+          #2a4a73 100%
+        );
+        padding: 2.5rem 1.5rem 1.6rem;
+        border-radius: 0 0 2rem 2rem;
+        margin-bottom: 1.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .header-wrap::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(251, 191, 36, 0.18) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .flame-glow {
+        text-shadow:
+          0 0 18px rgba(251, 191, 36, 0.6),
+          0 0 36px rgba(251, 191, 36, 0.25);
+      }
+
+      /* ── 탭 바 ── */
+      .tab-bar {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding: 0.85rem 1rem 0.1rem;
+        scrollbar-width: none;
+        background: transparent;
+      }
+      .tab-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-btn {
+        flex-shrink: 0;
+        padding: 0.38rem 0.85rem;
+        border-radius: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        cursor: pointer;
+        transition: all 0.17s;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+      }
+      .tab-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .tab-btn.active {
+        background: #fbbf24;
+        color: #1a2f4e;
+        border-color: #fbbf24;
+      }
+      .last-updated {
+        font-size: 0.68rem;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 0.6rem;
+        padding: 0 1rem;
+      }
+
+      /* ── 섹션 카드 ── */
+      .dash-card {
+        background: #ffffff;
+        border-radius: 1.25rem;
+        margin: 0 1rem 1rem;
+        overflow: hidden;
+        box-shadow:
+          0 2px 12px rgba(25, 31, 40, 0.07),
+          0 1px 3px rgba(25, 31, 40, 0.05);
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+      .dash-card:hover {
+        box-shadow:
+          0 6px 24px rgba(25, 31, 40, 0.1),
+          0 2px 6px rgba(25, 31, 40, 0.06);
+        transform: translateY(-1px);
+      }
+
+      /* ── 섹션 헤더 ── */
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 1.05rem 1.35rem 0.85rem;
+        border-bottom: 1px solid #f2f4f6;
+      }
+      .card-header .icon {
+        font-size: 1.1rem;
+      }
+      .card-header h2 {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #191f28;
+        letter-spacing: -0.02em;
+      }
+      .card-body {
+        padding: 1.1rem 1.35rem;
+      }
+
+      /* ── 공지사항 ── */
+      .notice-card {
+        border-left: 3px solid #fbbf24;
+        background: #fffdf5;
+        border-radius: 0 0.75rem 0.75rem 0;
+        padding: 0.85rem 1rem;
+        margin-bottom: 0.6rem;
+        transition: background 0.15s;
+      }
+      .notice-card:last-child {
+        margin-bottom: 0;
+      }
+      .notice-card:hover {
+        background: #fff8e1;
+      }
+      .notice-badge {
+        display: inline-flex;
+        align-items: center;
+        background: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+        font-size: 0.68rem;
+        font-weight: 700;
+        border-radius: 0.375rem;
+        padding: 0.12rem 0.5rem;
+        margin-bottom: 0.3rem;
+        letter-spacing: 0.02em;
+      }
+
+      /* ── 타임라인 ── */
+      .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #f2f4f6;
+      }
+      .timeline-item:last-child {
+        border-bottom: none;
+      }
+
+      /* 균일한 뱃지 */
+      .tl-badge {
+        width: 2.75rem;
+        height: 2.75rem;
+        min-width: 2.75rem;
+        border-radius: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f2f4f6;
+        border: 1.5px solid #e4e8ec;
+        flex-shrink: 0;
+      }
+      .tl-badge.accent {
+        background: #fff8e1;
+        border-color: #fde68a;
+      }
+      .tl-badge .day-text {
+        font-size: 0.75rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: #4e5968;
+        letter-spacing: -0.01em;
+      }
+      .tl-badge.accent .day-text {
+        color: #b45309;
+      }
+      .tl-badge .date-text {
+        font-size: 0.58rem;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #8b95a1;
+      }
+      .tl-badge.accent .date-text {
+        color: #d97706;
+      }
+
+      .tl-content {
+        flex: 1;
+        min-width: 0;
+      }
+      .tl-task {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #191f28;
+        line-height: 1.5;
+        margin-bottom: 0.2rem;
+      }
+      .tl-note {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin-top: 0.25rem;
+        align-items: center;
+      }
+      .tl-tag {
+        display: inline-block;
+        background: #f2f4f6;
+        color: #4e5968;
+        border: 1px solid #e4e8ec;
+        font-size: 0.67rem;
+        font-weight: 600;
+        border-radius: 0.3rem;
+        padding: 0.08rem 0.42rem;
+        letter-spacing: 0.01em;
+      }
+      .tl-tag.warn {
+        background: #fff8e1;
+        color: #b45309;
+        border-color: #fde68a;
+      }
+      .tl-note-text {
+        font-size: 0.77rem;
+        color: #8b95a1;
+        line-height: 1.5;
+      }
+
+      /* ── 테이블 ── */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+      }
+      .data-table thead tr {
+        background: #f8f9fa;
+      }
+      .data-table th {
+        padding: 0.65rem 0.75rem;
+        color: #8b95a1;
+        font-weight: 700;
+        text-align: left;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border-bottom: 1px solid #f2f4f6;
+      }
+      .data-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #f8f9fa;
+        color: #333d4b;
+        vertical-align: middle;
+      }
+      .data-table tbody tr {
+        transition: background 0.12s;
+      }
+      .data-table tbody tr:hover {
+        background: #fafafa;
+      }
+      .data-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* ── 역할 배지 ── */
+      .role-badge {
+        display: inline-block;
+        background: #f2f4f6;
+        color: #4e5968;
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: 0.375rem;
+        padding: 0.2rem 0.6rem;
+        border: 1px solid #e4e8ec;
+      }
+      .role-badge.leader {
+        background: #fff8e1;
+        color: #b45309;
+        border-color: #fde68a;
+      }
+
+      /* ── 사역 블록 ── */
+      .ministry-block {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid #f2f4f6;
+      }
+      .ministry-block:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .ministry-block:first-child {
+        padding-top: 0;
+      }
+      .ministry-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #191f28;
+        margin-bottom: 0.55rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .ministry-tag {
+        display: inline-block;
+        background: #f2f4f6;
+        color: #4e5968;
+        border: 1px solid #e4e8ec;
+        font-size: 0.67rem;
+        font-weight: 700;
+        border-radius: 0.375rem;
+        padding: 0.1rem 0.5rem;
+        letter-spacing: 0.01em;
+      }
+      .ministry-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.84rem;
+        color: #4e5968;
+        line-height: 1.6;
+        margin-bottom: 0.25rem;
+      }
+      .ministry-item:last-child {
+        margin-bottom: 0;
+      }
+      .ministry-dot {
+        color: #fbbf24;
+        font-weight: 800;
+        margin-top: 0.1rem;
+        flex-shrink: 0;
+      }
+
+      /* ── 체크리스트 ── */
+      .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.65rem 0.35rem;
+        border-bottom: 1px solid #f8f9fa;
+        transition: background 0.12s;
+        border-radius: 0.625rem;
+        cursor: pointer;
+      }
+      .checklist-item:last-child {
+        border-bottom: none;
+      }
+      .checklist-item:hover {
+        background: #fafafa;
+      }
+      .checklist-icon {
+        width: 1.15rem;
+        height: 1.15rem;
+        min-width: 1.15rem;
+        border-radius: 50%;
+        border: 2px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.15rem;
+        transition: all 0.18s;
+      }
+      .checklist-item.checked .checklist-icon {
+        background: #fbbf24;
+        border-color: #fbbf24;
+      }
+      .checklist-item.checked .check-mark {
+        display: block;
+      }
+      .check-mark {
+        display: none;
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 900;
+      }
+      .checklist-item.checked .checklist-text {
+        text-decoration: line-through;
+        color: #c9d1d9;
+      }
+      .checklist-text {
+        font-size: 0.875rem;
+        color: #333d4b;
+        line-height: 1.55;
+      }
+
+      /* ── 자료실 ── */
+      .resource-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.15rem 0.75rem;
+        border: 1.5px solid #e4e8ec;
+        border-radius: 1rem;
+        text-align: center;
+        text-decoration: none;
+        background: #fafafa;
+        transition: all 0.18s;
+      }
+      .resource-card:hover {
+        border-color: #fbbf24;
+        background: #fffdf5;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(251, 191, 36, 0.15);
+      }
+      .resource-icon {
+        font-size: 1.75rem;
+        margin-bottom: 0.45rem;
+      }
+      .resource-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #191f28;
+      }
+      .resource-sub {
+        font-size: 0.67rem;
+        color: #8b95a1;
+        margin-top: 0.18rem;
+      }
+
+      /* ── 질의 ── */
+      .qa-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        background: #f0f6ff;
+        border: 1px solid #d0e4ff;
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+        color: #1d4ed8;
+        transition: background 0.15s;
+      }
+      .qa-card:last-child {
+        margin-bottom: 0;
+      }
+      .qa-card:hover {
+        background: #e4efff;
+      }
+      .qa-num {
+        color: #93c5fd;
+        font-weight: 700;
+        font-size: 0.8rem;
+        min-width: 1rem;
+        flex-shrink: 0;
+      }
+
+      /* ── Next Step ── */
+      .nextstep-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f2f4f6;
+        font-size: 0.875rem;
+      }
+      .nextstep-card:last-child {
+        border-bottom: none;
+      }
+      .nextstep-num {
+        min-width: 1.5rem;
+        height: 1.5rem;
+        background: #fef3c7;
+        color: #b45309;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      /* ── 연락처 ── */
+      a.contact-link {
+        color: #2563eb;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      a.contact-link:hover {
+        color: #1d4ed8;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dashboard">
+      <!-- ── 헤더 (네이비 곡선 배경) ── -->
+      <div class="header-wrap">
+        <div style="text-align: center">
+          <div
+            style="font-size: 2.25rem; line-height: 1; margin-bottom: 0.55rem"
+          >
+            🕯️
+          </div>
+          <h1
+            class="flame-glow"
+            style="
+              font-size: 1.6rem;
+              font-weight: 800;
+              color: #fbbf24;
+              letter-spacing: -0.03em;
+              margin-bottom: 0.3rem;
+            "
+          >
+            타마등불
+          </h1>
+          <p
+            style="
+              font-size: 0.75rem;
+              color: rgba(255, 255, 255, 0.45);
+              letter-spacing: 0.06em;
+              text-transform: uppercase;
+              font-weight: 600;
+            "
+          >
+            Japan Mission Team Dashboard
+          </p>
+        </div>
+
+        <!-- 탭 바 -->
+        <nav>
+          <div class="tab-bar" role="tablist" aria-label="섹션 이동">
+            <button
+              class="tab-btn active"
+              onclick="jumpTo('notice-section', this)"
+            >
+              📢 공지
+            </button>
+            <button class="tab-btn" onclick="jumpTo('schedule-section', this)">
+              🗓️ 일정
+            </button>
+            <button class="tab-btn" onclick="jumpTo('ministry-section', this)">
+              🎵 사역
+            </button>
+            <button class="tab-btn" onclick="jumpTo('member-section', this)">
+              👥 R&amp;R
+            </button>
+            <button class="tab-btn" onclick="jumpTo('checklist-section', this)">
+              ✅ 준비물
+            </button>
+            <button class="tab-btn" onclick="jumpTo('qa-section', this)">
+              ❓ 질의
+            </button>
+            <button class="tab-btn" onclick="jumpTo('nextstep-section', this)">
+              🚀 넥스트
+            </button>
+            <button class="tab-btn" onclick="jumpTo('resources-section', this)">
+              📁 자료실
+            </button>
+          </div>
+          <p class="last-updated" id="last-updated-text"></p>
+        </nav>
+      </div>
+
+      <!-- ── 1. 공지사항 ── -->
+      <div class="dash-card" id="notice-section">
+        <div class="card-header">
+          <span class="icon">📢</span>
+          <h2>공지사항</h2>
+        </div>
+        <div class="card-body" id="notice-content"></div>
+      </div>
+
+      <!-- ── 2. 날짜별 주간 일정 ── -->
+      <div class="dash-card" id="schedule-section">
+        <div class="card-header">
+          <span class="icon">🗓️</span>
+          <h2>날짜별 주간 일정</h2>
+        </div>
+        <div class="card-body" id="schedule-content"></div>
+      </div>
+
+      <!-- ── 3. 사역 상세 계획 ── -->
+      <div class="dash-card" id="ministry-section">
+        <div class="card-header">
+          <span class="icon">🎵</span>
+          <h2>사역 상세 계획</h2>
+        </div>
+        <div class="card-body" id="ministry-content"></div>
+      </div>
+
+      <!-- ── 4. 멤버 R&R ── -->
+      <div class="dash-card" id="member-section">
+        <div class="card-header">
+          <span class="icon">👥</span>
+          <h2>멤버 및 R&amp;R</h2>
+        </div>
+        <div class="card-body">
+          <div style="overflow-x: auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>이름</th>
+                  <th>역할</th>
+                  <th>연락처</th>
+                </tr>
+              </thead>
+              <tbody id="member-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5. 준비물 체크리스트 ── -->
+      <div class="dash-card" id="checklist-section">
+        <div class="card-header">
+          <span class="icon">✅</span>
+          <h2>준비물 체크리스트</h2>
+        </div>
+        <div class="card-body">
+          <ul id="checklist-content"></ul>
+          <p
+            style="
+              font-size: 0.72rem;
+              color: #c9d1d9;
+              text-align: right;
+              margin-top: 0.75rem;
+            "
+          >
+            항목을 탭하면 체크됩니다
+          </p>
+        </div>
+      </div>
+
+      <!-- ── 6. 선교사님 질의 ── -->
+      <div class="dash-card" id="qa-section">
+        <div class="card-header">
+          <span class="icon">❓</span>
+          <h2>선교사님 확인 사항</h2>
+        </div>
+        <div class="card-body" id="qa-content"></div>
+      </div>
+
+      <!-- ── 7. 향후 일정 ── -->
+      <div class="dash-card" id="nextstep-section">
+        <div class="card-header">
+          <span class="icon">🚀</span>
+          <h2>향후 일정 · Next Step</h2>
+        </div>
+        <div class="card-body" id="nextstep-content"></div>
+      </div>
+
+      <!-- ── 8. 자료실 ── -->
+      <div class="dash-card" id="resources-section">
+        <div class="card-header">
+          <span class="icon">📁</span>
+          <h2>자료실 및 링크</h2>
+        </div>
+        <div class="card-body">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 0.75rem;
+            "
+            id="resources-content"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- /bg-dashboard -->
+
+    <script>
+      // ==============================================
+      // 1. 데이터 정의 — 이 객체만 수정하세요
+      // ==============================================
+      const dashboardData = {
+        lastUpdated: "2026-05-02",
+
+        notices: [
+          {
+            date: "2026-05-02",
+            badge: "📋 2차 회의",
+            text: "2차 타마등불 선교모임 회의록이 업데이트되었습니다. R&R 및 사역 계획을 확인해 주세요.",
+          },
+          {
+            date: "2026-05-02",
+            badge: "🕯️ 메시지",
+            text: "마리아의 시선(묵상)과 마르다의 손과 발(사역) — 분주함 속에서도 일본 땅과 우리 공동체를 향한 하나님의 시선을 유지합시다.",
+          },
+          {
+            date: "2026-05-02",
+            badge: "📅 3차 모임",
+            text: "다음 모임: 05/09 21:00, 새가족실. 선교사님과 Zoom 미팅이 있습니다.",
+          },
+          {
+            date: "2026-05-02",
+            badge: "🌙 무언극",
+            text: "무언극 내용은 톡방에서 업데이트 예정입니다. 공연 연습: 05/09 21:00 (워십 & 무언극 위주).",
+          },
+        ],
+
+        dailySchedule: [
+          {
+            day: "토",
+            date: "7/5",
+            task: "사역지 도착 및 이동",
+            notes: [],
+            accent: false,
+          },
+          {
+            day: "주일",
+            date: "7/6",
+            task: "어린이 사역 — 놀이·게임, 영어, 한국 문화체험",
+            notes: [
+              { type: "tag", text: "어린이 4~9세" },
+              { type: "text", text: "풍선아트, 폴라로이드, 의상 체험 포함" },
+            ],
+            accent: true,
+          },
+          {
+            day: "월",
+            date: "7/7",
+            task: "전단지 포스팅 (도립대) 및 버스킹",
+            notes: [{ type: "text", text: "청년·장년 대상 초청 전도 시작" }],
+            accent: false,
+          },
+          {
+            day: "화",
+            date: "7/8",
+            task: "전단지 포스팅 (역 주변) 및 버스킹",
+            notes: [],
+            accent: false,
+          },
+          {
+            day: "수",
+            date: "7/9",
+            task: "전단지 전도 및 버스킹, 리츠키 가정방문 (미정)",
+            notes: [
+              {
+                type: "warn",
+                text: "※ 홈리스 사역 성사 시 코리안 나이트가 이 날로 이동될 수 있음",
+              },
+            ],
+            accent: false,
+          },
+          {
+            day: "목",
+            date: "7/10",
+            task: "전단지 전도 및 버스킹 + 코리안 나이트 (한국문화체험)",
+            notes: [
+              { type: "tag", text: "한국음식·민속놀이·인생네컷" },
+              { type: "text", text: "장소 대관 필요" },
+            ],
+            accent: true,
+          },
+          {
+            day: "금",
+            date: "7/11",
+            task: "홈리스 사역 — 식료품 키트 전달, 축복과 위로 (미정)",
+            notes: [
+              { type: "tag", text: "예정" },
+              {
+                type: "text",
+                text: "사가미하라·하치오지팀 합류 | 05:40 기상 → 11:00 우에다 공원",
+              },
+            ],
+            accent: false,
+          },
+          {
+            day: "토",
+            date: "7/12",
+            task: "현지 문화 관광 및 선교사역 마무리",
+            notes: [],
+            accent: false,
+          },
+          {
+            day: "일",
+            date: "7/13",
+            task: "공항 이동 및 귀국",
+            notes: [],
+            accent: false,
+          },
+        ],
+
+        ministries: [
+          {
+            title: "🎤 공연 사역 (버스킹·무언극)",
+            tag: "총괄 팀장 TBD",
+            items: [
+              "구성: 악기(박서예, 김기숙, 구정환, 윤지현), 워십(이주은 외), 찬양(박서예, 박우상, 김기숙)",
+              "버스킹: 월(도립대) · 화(역 주변) · 수(전도 병행)",
+              "공연 30분 (무언극 포함) — 한·영·일 찬양 및 '소문의 낙원'",
+              "앰프 및 마이크 대여 확인 필요 (교회/현지)",
+              "무언극 내용 톡방 업데이트 예정",
+            ],
+          },
+          {
+            title: "🧒 어린이 문화 사역",
+            tag: "5/5(주일) | 10명(4~9세)",
+            items: [
+              "어린이 찬양으로 집중도 유도",
+              "영어·한국어·놀이(게임)·한국문화체험 중 선택 운영",
+              "코너 활동: 풍선아트, 포토존 의상 체험 및 폴라로이드 촬영",
+            ],
+          },
+          {
+            title: "🎎 현지인 초청 — 코리안 나이트",
+            tag: "5/9(목) 예정 | 청년·장년",
+            items: [
+              "한국음식 체험",
+              "한국 민속놀이 체험",
+              "한국식 인생네컷 (포토부스)",
+              "전단지 포스팅·버스킹(월~수)으로 사전 초청",
+              "장소 대관 필요",
+            ],
+          },
+          {
+            title: "🤝 홈리스 사역",
+            tag: "5/10(목) 예정 (미정)",
+            items: [
+              "오전 5:40 기상",
+              "11:00 우에다 공원 사역 — 식료품 키트 전달, 축복과 위로",
+              "사가미하라팀·하치오지팀과 합류",
+              "※ 성사 시 코리안 나이트는 수요일로 이동",
+            ],
+          },
+        ],
+
+        members: [
+          {
+            name: "이현준",
+            role: "전도사님",
+            generation: "-",
+            contact: "",
+            isLeader: true,
+          },
+          {
+            name: "심승태",
+            role: "팀장",
+            generation: "94",
+            contact: "",
+            isLeader: true,
+          },
+          {
+            name: "구정환",
+            role: "악기",
+            generation: "94",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "김기숙",
+            role: "의약품 / 악기 / 찬양",
+            generation: "97",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "박서예",
+            role: "악기 / 찬양",
+            generation: "96",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "박우상",
+            role: "사진 / 찬양",
+            generation: "96",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "백승원",
+            role: "일본어 선생님",
+            generation: "99",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "서상원",
+            role: "서기",
+            generation: "94",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "윤지현",
+            role: "포스터 디자인 / 악기",
+            generation: "99",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "이주은",
+            role: "워십",
+            generation: "99",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "정지환",
+            role: "회계",
+            generation: "96",
+            contact: "",
+            isLeader: false,
+          },
+        ],
+
+        checklists: [
+          {
+            text: "침낭 (총 9개 확보 — 부족 시 국내전도용 매트 또는 담요 활용 검토)",
+            checked: false,
+          },
+          { text: "앰프 및 마이크 대여 확인 (교회 / 현지)", checked: false },
+          { text: "개인 악기 및 케이블", checked: false },
+          { text: "악보 바인더 (한·영·일 찬양곡 포함)", checked: false },
+          {
+            text: "의약품 (담당: 김기숙 — 일본어 자료 공유 예정)",
+            checked: false,
+          },
+          { text: "전단지 포스터 인쇄물", checked: false },
+          { text: "풍선아트 재료 (어린이 문화 사역용)", checked: false },
+          { text: "폴라로이드 카메라 및 필름", checked: false },
+          { text: "포토존 의상 (어린이 체험용)", checked: false },
+          { text: "무언극 소품 및 의상", checked: false },
+          { text: "한국 민속놀이 재료 (코리안 나이트용)", checked: false },
+          { text: "한국음식 재료 (코리안 나이트용)", checked: false },
+          { text: "홈리스 사역용 식료품 키트 (성사 시)", checked: false },
+          { text: "코리안 나이트 장소 대관 확인", checked: false },
+        ],
+
+        qaItems: [
+          "도쿄도립대 방학 기간 내 학교 개방 여부 (전단지 포스팅/버스킹)",
+          "버스킹 제한 사항 (법적 / 문화적)",
+          "어린이 사역의 세부 방향성",
+          "버스킹용 앰프 및 마이크 대여 가능 여부",
+          "각 사역별 예상 소요 시간",
+          "어린이 사역 시 교회 외부 주차장 사용 가능 여부",
+        ],
+
+        nextSteps: [
+          {
+            text: "3차 팀 모임 — 토요일 저녁 9시, 새가족실 (함께 지혜 구하기)",
+          },
+          { text: "공연 연습 — 차주 토요일 21:00 (워십 & 무언극 위주)" },
+          { text: "줌(Zoom) 미팅 — 선교사님과 비전 공유 및 질의응답" },
+          { text: "현장 학습 — 양화진 외국인선교사 묘역 방문 예정" },
+        ],
+
+        resources: [
+          {
+            title: "공연사역 자료",
+            // subtitle: "Google Drive",
+            link: "https://drive.google.com/drive/folders/1g6S_-xoGMKXu1bGSaIZhd3jXjSXMFy74?usp=sharing",
+            icon: "📲",
+          },
+          {
+            title: "사진 자료",
+            // subtitle: "Google Photos",
+            link: "https://drive.google.com/drive/folders/1wzlMIyMzhHw9p8gek0wra2YYADQp-Ahx?usp=sharing",
+            icon: "📸",
+          },
+          {
+            title: "회의록",
+            // subtitle: "Google Docs",
+            link: "https://drive.google.com/drive/folders/1B9vT9nBlXozj1QTX4sncU-tTVDc-MGWQ?usp=sharing",
+            icon: "📝",
+          },
+          {
+            title: "찬양 플레이리스트",
+            // subtitle: "YouTube Playlist",
+            link: "https://www.youtube.com/playlist?list=PLLgEOdCNAv5UUmSwPYg6V6JoohN2xZHaS",
+            icon: "🎵",
+          },
+          {
+            title: "일본어 자료",
+            // subtitle: "Google Photos",
+            link: "https://drive.google.com/drive/folders/1JW3zlMvkwoRv9l-WiyO1Cms3HMYFrTua?usp=sharing",
+            icon: "📸",
+          },
+        ],
+      };
+
+      // ==============================================
+      // 2. 렌더링 클래스 — 수정 불필요
+      // ==============================================
+      class DashboardRenderer {
+        constructor(data) {
+          this.data = data;
+        }
+
+        renderLastUpdated() {
+          const el = document.getElementById("last-updated-text");
+          if (el) el.textContent = "Last updated · " + this.data.lastUpdated;
+        }
+
+        renderNotices() {
+          const c = document.getElementById("notice-content");
+          if (!this.data.notices.length) {
+            c.innerHTML =
+              '<p style="color:#8b95a1;font-size:.85rem;">등록된 공지사항이 없습니다.</p>';
+            return;
+          }
+          c.innerHTML = this.data.notices
+            .map(
+              (n) => `
+            <div class="notice-card">
+              <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem;">
+                <span class="notice-badge">${n.badge || n.date}</span>
+                ${n.badge ? `<span style="font-size:.68rem;color:#8b95a1;">${n.date}</span>` : ""}
+              </div>
+              <p style="font-size:.855rem;color:#333d4b;line-height:1.65;">${n.text}</p>
+            </div>`,
+            )
+            .join("");
+        }
+
+        renderDailySchedule() {
+          const c = document.getElementById("schedule-content");
+          c.innerHTML = this.data.dailySchedule
+            .map((s) => {
+              const noteParts = s.notes
+                .map((n) => {
+                  if (n.type === "tag")
+                    return `<span class="tl-tag">${n.text}</span>`;
+                  if (n.type === "warn")
+                    return `<span class="tl-tag warn">${n.text}</span>`;
+                  return `<span class="tl-note-text">${n.text}</span>`;
+                })
+                .join("");
+              return `
+              <div class="timeline-item">
+                <div class="tl-badge${s.accent ? " accent" : ""}">
+                  <span class="day-text">${s.day}</span>
+                  <span class="date-text">${s.date}</span>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-task">${s.task}</div>
+                  ${s.notes.length ? `<div class="tl-note">${noteParts}</div>` : ""}
+                </div>
+              </div>`;
+            })
+            .join("");
+        }
+
+        renderMinistries() {
+          document.getElementById("ministry-content").innerHTML =
+            this.data.ministries
+              .map(
+                (m) => `
+              <div class="ministry-block">
+                <div class="ministry-title">
+                  ${m.title}
+                  <span class="ministry-tag">${m.tag}</span>
+                </div>
+                ${m.items
+                  .map(
+                    (item) => `
+                  <div class="ministry-item">
+                    <span class="ministry-dot">›</span>
+                    <span>${item}</span>
+                  </div>`,
+                  )
+                  .join("")}
+              </div>`,
+              )
+              .join("");
+        }
+
+        renderMembers() {
+          document.getElementById("member-body").innerHTML = this.data.members
+            .map(
+              (m) => `
+            <tr>
+              <td style="font-weight:700;color:#191f28;white-space:nowrap;">
+                ${m.name}${m.generation ? `<span style="font-size:.72rem;color:#8b95a1;font-weight:400;margin-left:.3rem;">(${m.generation})</span>` : ""}
+              </td>
+              <td><span class="role-badge ${m.isLeader ? "leader" : ""}">${m.role}</span></td>
+              <td>${m.contact ? `<a href="tel:${m.contact}" class="contact-link">${m.contact}</a>` : '<span style="color:#d1d5db;font-size:.8rem;">—</span>'}</td>
+            </tr>`,
+            )
+            .join("");
+        }
+
+        renderChecklist() {
+          document.getElementById("checklist-content").innerHTML =
+            this.data.checklists
+              .map(
+                (item, i) => `
+            <li class="checklist-item${item.checked ? " checked" : ""}" onclick="toggleCheck(this,${i})">
+              <div class="checklist-icon"><span class="check-mark">✓</span></div>
+              <span class="checklist-text">${item.text}</span>
+            </li>`,
+              )
+              .join("");
+        }
+
+        renderQA() {
+          document.getElementById("qa-content").innerHTML = this.data.qaItems
+            .map(
+              (q, i) => `
+            <div class="qa-card">
+              <span class="qa-num">${i + 1}.</span>
+              <span>${q}</span>
+            </div>`,
+            )
+            .join("");
+        }
+
+        renderNextSteps() {
+          document.getElementById("nextstep-content").innerHTML =
+            this.data.nextSteps
+              .map(
+                (s, i) => `
+            <div class="nextstep-card">
+              <div class="nextstep-num">${i + 1}</div>
+              <span style="color:#333d4b;">${s.text}</span>
+            </div>`,
+              )
+              .join("");
+        }
+
+        renderResources() {
+          document.getElementById("resources-content").innerHTML =
+            this.data.resources
+              .map(
+                (r) => `
+            <a href="${r.link}" target="_blank" rel="noopener noreferrer" class="resource-card">
+              <div class="resource-icon">${r.icon}</div>
+              <div class="resource-title">${r.title}</div>
+              <div class="resource-sub">${r.subtitle}</div>
+            </a>`,
+              )
+              .join("");
+        }
+
+        init() {
+          this.renderLastUpdated();
+          this.renderNotices();
+          this.renderDailySchedule();
+          this.renderMinistries();
+          this.renderMembers();
+          this.renderChecklist();
+          this.renderQA();
+          this.renderNextSteps();
+          this.renderResources();
+        }
+      }
+
+      // ==============================================
+      // 3. 유틸리티
+      // ==============================================
+      function toggleCheck(el, idx) {
+        el.classList.toggle("checked");
+        dashboardData.checklists[idx].checked =
+          el.classList.contains("checked");
+      }
+
+      function jumpTo(id, btn) {
+        document
+          .getElementById(id)
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+
+      // ==============================================
+      // 4. 초기화
+      // ==============================================
+      document.addEventListener("DOMContentLoaded", () => {
+        new DashboardRenderer(dashboardData).init();
+      });
+    </script>
+  </body>
+</html>
