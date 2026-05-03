@@ -889,22 +889,29 @@
           },
           {
             name: "김기숙",
-            role: "의약품 / 악기 / 찬양",
+            role: "찬양 / 악기",
             generation: "97",
             contact: "",
             isLeader: false,
           },
           {
             name: "박서예",
-            role: "악기 / 찬양",
+            role: "찬양 / 악기",
             generation: "96",
             contact: "",
             isLeader: false,
           },
           {
             name: "박우상",
-            role: "사진 / 찬양",
+            role: "찬양 / 사진",
             generation: "96",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "배요한",
+            role: "미정",
+            generation: "95",
             contact: "",
             isLeader: false,
           },
@@ -939,6 +946,13 @@
           {
             name: "정지환",
             role: "회계",
+            generation: "96",
+            contact: "",
+            isLeader: false,
+          },
+          {
+            name: "조성희",
+            role: "의약품",
             generation: "96",
             contact: "",
             isLeader: false,
@@ -1112,7 +1126,7 @@
               (m) => `
             <tr>
               <td style="font-weight:700;color:#191f28;white-space:nowrap;">
-                ${m.name}${m.generation ? `<span style="font-size:.72rem;color:#8b95a1;font-weight:400;margin-left:.3rem;">(${m.generation})</span>` : ""}
+                ${m.name}${m.generation && m.generation !== "-" ? `<span style="font-size:.72rem;color:#8b95a1;font-weight:400;margin-left:.3rem;">(${m.generation})</span>` : ""}
               </td>
               <td><span class="role-badge ${m.isLeader ? "leader" : ""}">${m.role}</span></td>
               <td>${m.contact ? `<a href="tel:${m.contact}" class="contact-link">${m.contact}</a>` : '<span style="color:#d1d5db;font-size:.8rem;">—</span>'}</td>
