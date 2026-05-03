@@ -528,6 +528,58 @@
         color: #1d4ed8;
         text-decoration: underline;
       }
+
+      /* ── 스크롤 상단 버튼 ── */
+      #scroll-top-btn {
+        position: fixed;
+        bottom: 1.75rem;
+        right: 1.25rem;
+        width: 2.85rem;
+        height: 2.85rem;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fbbf24, #f59e0b);
+        color: #1a2f4e;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+          0 4px 16px rgba(251, 191, 36, 0.45),
+          0 2px 6px rgba(25, 31, 40, 0.18);
+        opacity: 0;
+        transform: translateY(12px) scale(0.88);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease,
+          box-shadow 0.2s ease;
+        pointer-events: none;
+        z-index: 999;
+      }
+      #scroll-top-btn.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      #scroll-top-btn:hover {
+        background: linear-gradient(145deg, #fcd34d, #fbbf24);
+        box-shadow:
+          0 6px 22px rgba(251, 191, 36, 0.6),
+          0 3px 8px rgba(25, 31, 40, 0.2);
+        transform: translateY(-2px) scale(1.05);
+      }
+      #scroll-top-btn:active {
+        transform: scale(0.96);
+      }
+      #scroll-top-btn svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        stroke: #1a2f4e;
+        stroke-width: 2.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
     </style>
   </head>
   <body>
@@ -707,6 +759,17 @@
       </div>
     </div>
     <!-- /bg-dashboard -->
+
+    <!-- ── 스크롤 상단 이동 버튼 ── -->
+    <button
+      id="scroll-top-btn"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      aria-label="맨 위로 이동"
+    >
+      <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
 
     <script>
       // ==============================================
@@ -960,10 +1023,7 @@
           { text: "앰프 및 마이크 대여 확인 (교회 / 현지)", checked: false },
           { text: "개인 악기 및 케이블", checked: false },
           { text: "악보 바인더 (한·영·일 찬양곡 포함)", checked: false },
-          {
-            text: "의약품",
-            checked: false,
-          },
+          { text: "의약품", checked: false },
           { text: "전단지 포스터 인쇄물", checked: false },
           { text: "풍선아트 재료 (어린이 문화 사역용)", checked: false },
           { text: "폴라로이드 카메라 및 필름", checked: false },
@@ -1213,7 +1273,21 @@
       }
 
       // ==============================================
-      // 4. 초기화
+      // 4. 스크롤 상단 버튼
+      // ==============================================
+      (function () {
+        const btn = document.getElementById("scroll-top-btn");
+        window.addEventListener(
+          "scroll",
+          () => {
+            btn.classList.toggle("visible", window.scrollY > 280);
+          },
+          { passive: true },
+        );
+      })();
+
+      // ==============================================
+      // 5. 초기화
       // ==============================================
       document.addEventListener("DOMContentLoaded", () => {
         new DashboardRenderer(dashboardData).init();
