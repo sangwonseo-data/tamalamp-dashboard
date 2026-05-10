@@ -747,6 +747,9 @@
             <button class="tab-btn" onclick="jumpTo('vision-section', this)">
               🙏 선교사님 비전
             </button>
+            <button class="tab-btn" onclick="jumpTo('nextstep-section', this)">
+              🚀 향후 일정
+            </button>
             <button class="tab-btn" onclick="jumpTo('schedule-section', this)">
               🗓️ 선교 일정
             </button>
@@ -761,9 +764,6 @@
             </button>
             <button class="tab-btn" onclick="jumpTo('qa-section', this)">
               ❓ 질의
-            </button>
-            <button class="tab-btn" onclick="jumpTo('nextstep-section', this)">
-              🚀 향후 일정
             </button>
             <button class="tab-btn" onclick="jumpTo('resources-section', this)">
               📁 자료실
@@ -816,6 +816,29 @@
         </div>
         <div class="card-body-wrap">
           <div class="card-body" id="vision-content"></div>
+        </div>
+      </div>
+
+      <!-- 8. 향후 일정 -->
+      <div class="dash-card" id="nextstep-section">
+        <div class="card-header">
+          <span class="icon">🚀</span>
+          <h2>향후 일정 · Next Step</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="nextstep-content"></div>
         </div>
       </div>
 
@@ -956,29 +979,6 @@
         </div>
         <div class="card-body-wrap">
           <div class="card-body" id="qa-content"></div>
-        </div>
-      </div>
-
-      <!-- 8. 향후 일정 -->
-      <div class="dash-card" id="nextstep-section">
-        <div class="card-header">
-          <span class="icon">🚀</span>
-          <h2>향후 일정 · Next Step</h2>
-          <svg
-            class="chevron-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </div>
-        <div class="card-body-wrap">
-          <div class="card-body" id="nextstep-content"></div>
         </div>
       </div>
 
