@@ -30,14 +30,12 @@
         -webkit-font-smoothing: antialiased;
       }
 
-      /* ── 배경 ── */
       .bg-dashboard {
         background: #f2f4f6;
         min-height: 100vh;
         padding-bottom: 3rem;
       }
 
-      /* ── 헤더 ── */
       .header-wrap {
         background: linear-gradient(
           160deg,
@@ -71,7 +69,6 @@
           0 0 36px rgba(251, 191, 36, 0.25);
       }
 
-      /* ── 탭 바 ── */
       .tab-bar {
         display: flex;
         gap: 0.35rem;
@@ -113,7 +110,6 @@
         padding: 0 1rem;
       }
 
-      /* ── 섹션 카드 ── */
       .dash-card {
         background: #ffffff;
         border-radius: 1.25rem;
@@ -133,7 +129,6 @@
         transform: translateY(-1px);
       }
 
-      /* ── 섹션 헤더 ── */
       .card-header {
         display: flex;
         align-items: center;
@@ -154,7 +149,6 @@
         padding: 1.1rem 1.35rem;
       }
 
-      /* ── 공지사항 ── */
       .notice-card {
         border-left: 3px solid #fbbf24;
         background: #fffdf5;
@@ -183,7 +177,6 @@
         letter-spacing: 0.02em;
       }
 
-      /* ── 타임라인 ── */
       .timeline-item {
         display: flex;
         align-items: flex-start;
@@ -195,7 +188,6 @@
         border-bottom: none;
       }
 
-      /* 균일한 뱃지 */
       .tl-badge {
         width: 2.75rem;
         height: 2.75rem;
@@ -273,7 +265,6 @@
         line-height: 1.5;
       }
 
-      /* ── 테이블 ── */
       .data-table {
         width: 100%;
         border-collapse: collapse;
@@ -308,7 +299,6 @@
         border-bottom: none;
       }
 
-      /* ── 역할 배지 ── */
       .role-badge {
         display: inline-block;
         background: #f2f4f6;
@@ -325,7 +315,6 @@
         border-color: #fde68a;
       }
 
-      /* ── 사역 블록 ── */
       .ministry-block {
         padding: 0.9rem 0;
         border-bottom: 1px solid #f2f4f6;
@@ -377,7 +366,6 @@
         flex-shrink: 0;
       }
 
-      /* ── 체크리스트 ── */
       .checklist-item {
         display: flex;
         align-items: flex-start;
@@ -429,7 +417,6 @@
         line-height: 1.55;
       }
 
-      /* ── 자료실 ── */
       .resource-card {
         display: flex;
         flex-direction: column;
@@ -464,7 +451,6 @@
         margin-top: 0.18rem;
       }
 
-      /* ── 질의 ── */
       .qa-card {
         display: flex;
         align-items: flex-start;
@@ -492,7 +478,6 @@
         flex-shrink: 0;
       }
 
-      /* ── Next Step ── */
       .nextstep-card {
         display: flex;
         align-items: flex-start;
@@ -518,7 +503,105 @@
         flex-shrink: 0;
       }
 
-      /* ── 연락처 ── */
+      /* ── 비전 섹션 전용 스타일 ── */
+      .vision-block {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid #f2f4f6;
+      }
+      .vision-block:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .vision-block:first-child {
+        padding-top: 0;
+      }
+      .vision-q {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.55rem;
+        margin-bottom: 0.6rem;
+      }
+      .vision-q-badge {
+        flex-shrink: 0;
+        background: #1e3a5f;
+        color: #fbbf24;
+        font-size: 0.68rem;
+        font-weight: 800;
+        border-radius: 0.375rem;
+        padding: 0.18rem 0.55rem;
+        margin-top: 0.1rem;
+        letter-spacing: 0.02em;
+      }
+      .vision-q-text {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #191f28;
+        line-height: 1.55;
+      }
+      .vision-a {
+        font-size: 0.845rem;
+        color: #4e5968;
+        line-height: 1.75;
+        padding-left: 0.2rem;
+      }
+      .vision-highlight {
+        background: linear-gradient(120deg, #fff8e1 0%, #fef3c7 100%);
+        border-left: 3px solid #fbbf24;
+        border-radius: 0 0.6rem 0.6rem 0;
+        padding: 0.7rem 0.9rem;
+        margin-top: 0.55rem;
+        font-size: 0.82rem;
+        color: #92400e;
+        font-weight: 600;
+        line-height: 1.65;
+      }
+      .vision-stat-row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+      .vision-stat {
+        flex: 1;
+        min-width: 7rem;
+        background: #f8f9fa;
+        border: 1px solid #e4e8ec;
+        border-radius: 0.75rem;
+        padding: 0.65rem 0.8rem;
+        text-align: center;
+      }
+      .vision-stat-num {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #1e3a5f;
+        letter-spacing: -0.03em;
+      }
+      .vision-stat-label {
+        font-size: 0.68rem;
+        color: #8b95a1;
+        margin-top: 0.2rem;
+        line-height: 1.4;
+      }
+      .prayer-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.55rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+        font-size: 0.845rem;
+        color: #333d4b;
+        line-height: 1.6;
+      }
+      .prayer-item:last-child {
+        border-bottom: none;
+      }
+      .prayer-dot {
+        color: #fbbf24;
+        font-weight: 800;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
       a.contact-link {
         color: #2563eb;
         font-weight: 500;
@@ -529,7 +612,6 @@
         text-decoration: underline;
       }
 
-      /* ── 스크롤 상단 버튼 ── */
       #scroll-top-btn {
         position: fixed;
         bottom: 1.75rem;
@@ -580,11 +662,49 @@
         stroke-linecap: round;
         stroke-linejoin: round;
       }
+
+      /* ── 아코디언 스타일 ── */
+      .card-header {
+        cursor: pointer;
+        user-select: none;
+      }
+      .card-header .chevron-icon {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 1.2rem;
+        height: 1.2rem;
+        color: #8b95a1;
+        transition:
+          transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.2s;
+      }
+      .dash-card.open .card-header .chevron-icon {
+        transform: rotate(180deg);
+        color: #fbbf24;
+      }
+      .card-header:hover .chevron-icon {
+        color: #fbbf24;
+      }
+      .dash-card:not(.open) .card-header {
+        border-bottom-color: transparent;
+      }
+      .card-body-wrap {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition:
+          max-height 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.25s ease;
+      }
+      .dash-card.open .card-body-wrap {
+        max-height: 9999px;
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
     <div class="bg-dashboard">
-      <!-- ── 헤더 (네이비 곡선 배경) ── -->
+      <!-- 헤더 -->
       <div class="header-wrap">
         <div style="text-align: center">
           <div
@@ -616,8 +736,6 @@
             Tama Lamp Team Dashboard
           </p>
         </div>
-
-        <!-- 탭 바 -->
         <nav>
           <div class="tab-bar" role="tablist" aria-label="섹션 이동">
             <button
@@ -626,14 +744,17 @@
             >
               📢 공지
             </button>
+            <button class="tab-btn" onclick="jumpTo('vision-section', this)">
+              🙏 선교사님 비전
+            </button>
             <button class="tab-btn" onclick="jumpTo('schedule-section', this)">
-              🗓️ 일정
+              🗓️ 선교 일정
             </button>
             <button class="tab-btn" onclick="jumpTo('ministry-section', this)">
-              🎵 사역
+              🎵 사역 계획
             </button>
             <button class="tab-btn" onclick="jumpTo('member-section', this)">
-              👥 R&amp;R
+              👥 멤버
             </button>
             <button class="tab-btn" onclick="jumpTo('checklist-section', this)">
               ✅ 준비물
@@ -652,152 +773,281 @@
         </nav>
       </div>
 
-      <!-- ── 1. 공지사항 ── -->
+      <!-- 1. 공지사항 -->
       <div class="dash-card" id="notice-section">
         <div class="card-header">
           <span class="icon">📢</span>
           <h2>공지사항</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body" id="notice-content"></div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="notice-content"></div>
+        </div>
       </div>
 
-      <!-- ── 2. 날짜별 주간 일정 ── -->
+      <!-- 7. 선교사님 비전 (NEW) -->
+      <div class="dash-card" id="vision-section">
+        <div class="card-header">
+          <span class="icon">🙏</span>
+          <h2>선교사님 비전 · 인터뷰</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="vision-content"></div>
+        </div>
+      </div>
+
+      <!-- 2. 날짜별 주간 일정 -->
       <div class="dash-card" id="schedule-section">
         <div class="card-header">
           <span class="icon">🗓️</span>
-          <h2>날짜별 주간 일정</h2>
+          <h2>선교 일정</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body" id="schedule-content"></div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="schedule-content"></div>
+        </div>
       </div>
 
-      <!-- ── 3. 사역 상세 계획 ── -->
+      <!-- 3. 사역 상세 계획 -->
       <div class="dash-card" id="ministry-section">
         <div class="card-header">
           <span class="icon">🎵</span>
           <h2>사역 상세 계획</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body" id="ministry-content"></div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="ministry-content"></div>
+        </div>
       </div>
 
-      <!-- ── 4. 멤버 R&R ── -->
+      <!-- 4. 멤버 R&R -->
       <div class="dash-card" id="member-section">
         <div class="card-header">
           <span class="icon">👥</span>
           <h2>멤버 및 R&amp;R</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body">
-          <div style="overflow-x: auto">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>이름</th>
-                  <th>역할</th>
-                  <th>연락처</th>
-                </tr>
-              </thead>
-              <tbody id="member-body"></tbody>
-            </table>
+        <div class="card-body-wrap">
+          <div class="card-body">
+            <div style="overflow-x: auto">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>이름</th>
+                    <th>역할</th>
+                    <th>연락처</th>
+                  </tr>
+                </thead>
+                <tbody id="member-body"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ── 5. 준비물 체크리스트 ── -->
+      <!-- 5. 준비물 체크리스트 -->
       <div class="dash-card" id="checklist-section">
         <div class="card-header">
           <span class="icon">✅</span>
           <h2>준비물 체크리스트</h2>
-        </div>
-        <div class="card-body">
-          <ul id="checklist-content"></ul>
-          <p
-            style="
-              font-size: 0.72rem;
-              color: #c9d1d9;
-              text-align: right;
-              margin-top: 0.75rem;
-            "
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
           >
-            항목을 탭하면 체크됩니다
-          </p>
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="card-body-wrap">
+          <div class="card-body">
+            <ul id="checklist-content"></ul>
+            <p
+              style="
+                font-size: 0.72rem;
+                color: #c9d1d9;
+                text-align: right;
+                margin-top: 0.75rem;
+              "
+            >
+              항목을 탭하면 체크됩니다
+            </p>
+          </div>
         </div>
       </div>
 
-      <!-- ── 6. 선교사님 질의 ── -->
+      <!-- 6. 선교사님 확인 사항 -->
       <div class="dash-card" id="qa-section">
         <div class="card-header">
           <span class="icon">❓</span>
-          <h2>선교사님 확인 사항</h2>
+          <h2>선교사님께 질문</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body" id="qa-content"></div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="qa-content"></div>
+        </div>
       </div>
 
-      <!-- ── 7. 향후 일정 ── -->
+      <!-- 8. 향후 일정 -->
       <div class="dash-card" id="nextstep-section">
         <div class="card-header">
           <span class="icon">🚀</span>
           <h2>향후 일정 · Next Step</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body" id="nextstep-content"></div>
+        <div class="card-body-wrap">
+          <div class="card-body" id="nextstep-content"></div>
+        </div>
       </div>
 
-      <!-- ── 8. 자료실 ── -->
+      <!-- 9. 자료실 -->
       <div class="dash-card" id="resources-section">
         <div class="card-header">
           <span class="icon">📁</span>
           <h2>자료실 및 링크</h2>
+          <svg
+            class="chevron-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
-        <div class="card-body">
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 0.75rem;
-            "
-            id="resources-content"
-          ></div>
+        <div class="card-body-wrap">
+          <div class="card-body">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+              "
+              id="resources-content"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- /bg-dashboard -->
 
-    <!-- ── 스크롤 상단 이동 버튼 ── -->
+    <!-- 스크롤 상단 버튼 -->
     <button
       id="scroll-top-btn"
       onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
       aria-label="맨 위로 이동"
     >
-      <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15" />
-      </svg>
+      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15" /></svg>
     </button>
 
     <script>
-      // ==============================================
-      // 1. 데이터 정의 — 이 객체만 수정하세요
-      // ==============================================
       const dashboardData = {
-        lastUpdated: "2026-05-02",
+        lastUpdated: "2026-05-09",
 
         notices: [
           {
-            date: "2026-05-02",
-            badge: "📋 2차 회의",
-            text: "2차 타마등불 선교모임 회의록이 업데이트되었습니다. R&R 및 사역 계획을 확인해 주세요.",
+            date: "2026-05-09",
+            badge: "📋 3차 회의 · Zoom 미팅 완료",
+            text: "'선교사님 비전·인터뷰' 탭을 확인해 주세요.",
+          },
+          {
+            date: "2026-05-09",
+            badge: "🙏 기도 요청",
+            text: "선교사님의 기도제목: ① 한 영혼이 교회에 온전히 정착되는 은혜 ② 가정사역을 통한 부흥(가정이 연결되는 은혜) ③ 전도 현장에서의 영적 담대함과 용기.",
+          },
+          {
+            date: "2026-05-09",
+            badge: "⛪ 현지 사역 안내",
+            text: "타마등불 교회 예배 시간: 9:30 주일학교 / 10:30 주일예배 (기본 일본어, 한국인 있을 시 한국어 진행). 교회 내 취사 가능 / 3분 거리 대형 마트 도시락 활용 가능.",
           },
           {
             date: "2026-05-02",
             badge: "🕯️ 메시지",
-            text: "마리아의 '시선'과 마르다의 '손과 발'. <br>분주함 속에서도 일본 땅과 우리 공동체를 향한 하나님의 시선을 유지합시다.",
-          },
-          {
-            date: "2026-05-02",
-            badge: "📅 3차 모임",
-            text: "다음 모임: 05/09 21:00, 새가족실. <br>선교사님과 Zoom 미팅이 있습니다.",
-          },
-          {
-            date: "2026-05-02",
-            badge: "🌙 무언극",
-            text: "무언극 내용은 톡방에서 업데이트 예정입니다. <br>공연 연습: 05/09 21:00 (워십 & 무언극 위주).",
+            text: "마리아의 '시선'과 마르다의 '손과 발'. 분주함 속에서도 일본 땅과 우리 공동체를 향한 하나님의 시선을 유지합시다.",
           },
         ],
 
@@ -1036,20 +1286,62 @@
         ],
 
         qaItems: [
-          "도쿄도립대 방학 기간 내 학교 개방 여부 (전단지 포스팅/버스킹)",
-          "버스킹 제한 사항 (법적 / 문화적)",
-          "어린이 사역의 세부 방향성",
-          "버스킹용 앰프 및 마이크 대여 가능 여부",
-          "각 사역별 예상 소요 시간",
-          "어린이 사역 시 교회 외부 주차장 사용 가능 여부",
+          "버스킹 제한 사항 (법적 / 문화적) — 강하게 권면하는 것만 피하면 됨 (확인 완료)",
+          "어린이 사역의 세부 방향성 — 사모님과 추가 논의 예정",
+          "선교사님 자녀들을 위한 여름성경학교",
         ],
+
+        vision: {
+          interview: [
+            {
+              q: "일본, 그리고 타마 선교의 비전과 사역에 대해 말씀해 주세요.",
+              a: "일본은 동양 문화권 안에서 경제적으로 가장 부유한 나라 중 하나이지만, 영적으로는 매우 척박한 '불모지'와 같습니다. 전체 복음화율은 1% 미만이며, 개신교·가톨릭을 모두 합쳐도 약 0.43%에 불과합니다. 진실로 예수님을 믿고 따르는 개신교 성도는 0.1~0.2% 정도로 보고 있습니다.<br><br>눈에 보이는 열매가 당장 적어 보일지라도 멈추지 않고 사역을 이어가고 있습니다. 처음엔 캠퍼스 대학생 대상으로 시작했고, 이후 가정들과 연결되며 사모님의 '영어교실'을 통해 복음의 통로를 만들었습니다. 현재는 [캠퍼스 사역]과 [가정·어린이 사역] 두 축으로 운영 중이며, 주중에는 복음 전단지 배포와 노방전도, 유학생 사역도 병행합니다.",
+              highlight: "일본은 부유하지만 영적 불모지입니다.",
+              stats: [
+                {
+                  num: "0.43%",
+                  label: "전체 복음화율(개신교+가톨릭+동방정교회)",
+                },
+                { num: "0.1~0.2%", label: "교회에 속한 개신교 성도 비율" },
+                { num: "20년+", label: "선교사님 사역 연수" },
+              ],
+            },
+            {
+              q: "처음 일본 선교를 결심하게 된 계기가 궁금합니다.",
+              a: "처음 유학생 신분으로 일본에 왔을 때, '왜 한국과 달리 일본에는 크리스천이 이렇게 없을까'라는 안타까움이 늘 있었습니다. 입술로 복음을 전할 기회가 열리기를 간절히 기도하던 중, 교회 안에서도 일본 영혼 구원을 향한 뜨거운 마음들이 모였습니다. 그 흐름 속에서 기도로 준비하며 일본에서 목사 안수를 받고 개척까지 이르게 되었습니다.",
+              highlight: null,
+              stats: [],
+            },
+            {
+              q: "현재 가장 마음을 쏟고 계신 기도제목은 무엇인가요?",
+              a: "예수님의 몸이 될 수 있는 참된 영혼들이 든든히 세워지기를 기도합니다. 일본 사회는 겉으로 조용하고 질서 정연해 보이지만 영적으로 매우 혼탁하며, 이곳에서의 신앙생활은 결코 쉽지 않습니다. 일본 땅을 위해, 그리고 이곳 한국인 유학생들이 믿음을 잃지 않도록, 새로운 영혼들이 구원의 길로 들어설 수 있도록 함께 마음을 모아주시기 바랍니다.",
+              highlight: null,
+              stats: [],
+            },
+            {
+              q: "사모님과 가족 이야기도 들려주세요.",
+              a: "선배 목사님의 소개로 사모님을 일본에서 만나 결혼하여 지금까지 든든한 동역자로 함께하고 있습니다. 일본에 처음 발을 디딘 건 2005년으로, 벌써 20년이 넘었습니다. 현재 7살 아들(장난기 심함)과 3살 딸(고집 있음)이 있습니다.",
+              highlight: null,
+              stats: [],
+            },
+          ],
+          prayerItems: [
+            "한 영혼이 교회에 온전히 정착되는 은혜",
+            "가정사역을 통한 부흥(가정이 연결되는 은혜)",
+            "전도 현장에서 필요한 영적 담대함과 용기",
+          ],
+          background: [
+            "신사 및 마츠리 문화권 — 오직 예수님만 믿는 것을 지역·가정에 대한 배신으로 느끼는 경향",
+            "일본인은 믿기 시작하면 매우 신실함 — 어려서부터 복음을 접하는 것이 중요합니다",
+            "캠퍼스 전도 — 연령대가 비슷한 청년에 대한 동질감이 복음을 전하는 통로가 될 수도 있습니다",
+            "한국어에 대한 관심이 높음 (영어보다 한국어 소통이 효과적)",
+          ],
+        },
 
         nextSteps: [
           {
-            text: "3차 팀 모임 — 05/09 21:00, 새가족실 (함께 지혜 구하기)",
+            text: "일본선교를 향한 하나님의 시선과 선교사님의 비전을 두고 함께 기도해요 🙏",
           },
-          { text: "공연 연습 — 05/09 21:00 (워십 & 무언극 위주)" },
-          { text: "줌(Zoom) 미팅 — 선교사님과 비전 공유 및 질의응답" },
           { text: "현장 학습 — 양화진 외국인선교사 묘역 방문 예정" },
         ],
 
@@ -1087,9 +1379,6 @@
         ],
       };
 
-      // ==============================================
-      // 2. 렌더링 클래스 — 수정 불필요
-      // ==============================================
       class DashboardRenderer {
         constructor(data) {
           this.data = data;
@@ -1110,13 +1399,13 @@
           c.innerHTML = this.data.notices
             .map(
               (n) => `
-            <div class="notice-card">
-              <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem;">
-                <span class="notice-badge">${n.badge || n.date}</span>
-                ${n.badge ? `<span style="font-size:.68rem;color:#8b95a1;">${n.date}</span>` : ""}
-              </div>
-              <p style="font-size:.855rem;color:#333d4b;line-height:1.65;">${n.text}</p>
-            </div>`,
+                  <div class="notice-card">
+                    <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem;">
+                      <span class="notice-badge">${n.badge || n.date}</span>
+                      ${n.badge ? `<span style="font-size:.68rem;color:#8b95a1;">${n.date}</span>` : ""}
+                    </div>
+                    <p style="font-size:.855rem;color:#333d4b;line-height:1.65;">${n.text}</p>
+                  </div>`,
             )
             .join("");
         }
@@ -1135,16 +1424,16 @@
                 })
                 .join("");
               return `
-              <div class="timeline-item">
-                <div class="tl-badge${s.accent ? " accent" : ""}">
-                  <span class="day-text">${s.day}</span>
-                  <span class="date-text">${s.date}</span>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-task">${s.task}</div>
-                  ${s.notes.length ? `<div class="tl-note">${noteParts}</div>` : ""}
-                </div>
-              </div>`;
+                    <div class="timeline-item">
+                      <div class="tl-badge${s.accent ? " accent" : ""}">
+                        <span class="day-text">${s.day}</span>
+                        <span class="date-text">${s.date}</span>
+                      </div>
+                      <div class="tl-content">
+                        <div class="tl-task">${s.task}</div>
+                        ${s.notes.length ? `<div class="tl-note">${noteParts}</div>` : ""}
+                      </div>
+                    </div>`;
             })
             .join("");
         }
@@ -1154,21 +1443,21 @@
             this.data.ministries
               .map(
                 (m) => `
-              <div class="ministry-block">
-                <div class="ministry-title">
-                  ${m.title}
-                  <span class="ministry-tag">${m.tag}</span>
-                </div>
-                ${m.items
-                  .map(
-                    (item) => `
-                  <div class="ministry-item">
-                    <span class="ministry-dot">›</span>
-                    <span>${item}</span>
+                  <div class="ministry-block">
+                    <div class="ministry-title">
+                      ${m.title}
+                      <span class="ministry-tag">${m.tag}</span>
+                    </div>
+                    ${m.items
+                      .map(
+                        (item) => `
+                      <div class="ministry-item">
+                        <span class="ministry-dot">›</span>
+                        <span>${item}</span>
+                      </div>`,
+                      )
+                      .join("")}
                   </div>`,
-                  )
-                  .join("")}
-              </div>`,
               )
               .join("");
         }
@@ -1177,13 +1466,13 @@
           document.getElementById("member-body").innerHTML = this.data.members
             .map(
               (m) => `
-            <tr>
-              <td style="font-weight:700;color:#191f28;white-space:nowrap;">
-                ${m.name}${m.generation && m.generation !== "-" ? `<span style="font-size:.72rem;color:#8b95a1;font-weight:400;margin-left:.3rem;">(${m.generation})</span>` : ""}
-              </td>
-              <td><span class="role-badge ${m.isLeader ? "leader" : ""}">${m.role}</span></td>
-              <td>${m.contact ? `<a href="tel:${m.contact}" class="contact-link">${m.contact}</a>` : '<span style="color:#d1d5db;font-size:.8rem;">—</span>'}</td>
-            </tr>`,
+                  <tr>
+                    <td style="font-weight:700;color:#191f28;white-space:nowrap;">
+                      ${m.name}${m.generation && m.generation !== "-" ? `<span style="font-size:.72rem;color:#8b95a1;font-weight:400;margin-left:.3rem;">(${m.generation})</span>` : ""}
+                    </td>
+                    <td><span class="role-badge ${m.isLeader ? "leader" : ""}">${m.role}</span></td>
+                    <td>${m.contact ? `<a href="tel:${m.contact}" class="contact-link">${m.contact}</a>` : '<span style="color:#d1d5db;font-size:.8rem;">—</span>'}</td>
+                  </tr>`,
             )
             .join("");
         }
@@ -1193,10 +1482,10 @@
             this.data.checklists
               .map(
                 (item, i) => `
-            <li class="checklist-item${item.checked ? " checked" : ""}" onclick="toggleCheck(this,${i})">
-              <div class="checklist-icon"><span class="check-mark">✓</span></div>
-              <span class="checklist-text">${item.text}</span>
-            </li>`,
+                  <li class="checklist-item${item.checked ? " checked" : ""}" onclick="toggleCheck(this,${i})">
+                    <div class="checklist-icon"><span class="check-mark">✓</span></div>
+                    <span class="checklist-text">${item.text}</span>
+                  </li>`,
               )
               .join("");
         }
@@ -1205,12 +1494,82 @@
           document.getElementById("qa-content").innerHTML = this.data.qaItems
             .map(
               (q, i) => `
-            <div class="qa-card">
-              <span class="qa-num">${i + 1}.</span>
-              <span>${q}</span>
-            </div>`,
+                  <div class="qa-card">
+                    <span class="qa-num">${i + 1}.</span>
+                    <span>${q}</span>
+                  </div>`,
             )
             .join("");
+        }
+
+        renderVision() {
+          const v = this.data.vision;
+          let html = "";
+
+          // 인터뷰 Q&A 블록
+          html += v.interview
+            .map((item) => {
+              const statsHtml = item.stats.length
+                ? `
+                    <div class="vision-stat-row">
+                      ${item.stats
+                        .map(
+                          (s) => `
+                        <div class="vision-stat">
+                          <div class="vision-stat-num">${s.num}</div>
+                          <div class="vision-stat-label">${s.label}</div>
+                        </div>`,
+                        )
+                        .join("")}
+                    </div>`
+                : "";
+              const highlightHtml = item.highlight
+                ? `<div class="vision-highlight">${item.highlight}</div>`
+                : "";
+              return `
+                    <div class="vision-block">
+                      <div class="vision-q">
+                        <span class="vision-q-badge">Q</span>
+                        <span class="vision-q-text">${item.q}</span>
+                      </div>
+                      <div class="vision-a">${item.a}</div>
+                      ${highlightHtml}
+                      ${statsHtml}
+                    </div>`;
+            })
+            .join("");
+
+          // 기도제목
+          html += `
+                  <div class="vision-block">
+                    <div class="ministry-title" style="margin-bottom:.6rem;">🙏 선교사님 기도제목</div>
+                    ${v.prayerItems
+                      .map(
+                        (p) => `
+                      <div class="prayer-item">
+                        <span class="prayer-dot">🕯</span>
+                        <span>${p}</span>
+                      </div>`,
+                      )
+                      .join("")}
+                  </div>`;
+
+          // 현지 영적 배경
+          html += `
+                  <div class="vision-block">
+                    <div class="ministry-title" style="margin-bottom:.6rem;">🗾 현지 영적 배경</div>
+                    ${v.background
+                      .map(
+                        (b) => `
+                      <div class="ministry-item">
+                        <span class="ministry-dot">›</span>
+                        <span>${b}</span>
+                      </div>`,
+                      )
+                      .join("")}
+                  </div>`;
+
+          document.getElementById("vision-content").innerHTML = html;
         }
 
         renderNextSteps() {
@@ -1218,10 +1577,10 @@
             this.data.nextSteps
               .map(
                 (s, i) => `
-            <div class="nextstep-card">
-              <div class="nextstep-num">${i + 1}</div>
-              <span style="color:#333d4b;">${s.text}</span>
-            </div>`,
+                  <div class="nextstep-card">
+                    <div class="nextstep-num">${i + 1}</div>
+                    <span style="color:#333d4b;">${s.text}</span>
+                  </div>`,
               )
               .join("");
         }
@@ -1231,11 +1590,11 @@
             this.data.resources
               .map(
                 (r) => `
-            <a href="${r.link}" target="_blank" rel="noopener noreferrer" class="resource-card">
-              <div class="resource-icon">${r.icon}</div>
-              <div class="resource-title">${r.title}</div>
-              <div class="resource-sub">${r.subtitle}</div>
-            </a>`,
+                  <a href="${r.link}" target="_blank" rel="noopener noreferrer" class="resource-card">
+                    <div class="resource-icon">${r.icon}</div>
+                    <div class="resource-title">${r.title}</div>
+                    <div class="resource-sub">${r.subtitle}</div>
+                  </a>`,
               )
               .join("");
         }
@@ -1248,14 +1607,12 @@
           this.renderMembers();
           this.renderChecklist();
           this.renderQA();
+          this.renderVision();
           this.renderNextSteps();
           this.renderResources();
         }
       }
 
-      // ==============================================
-      // 3. 유틸리티
-      // ==============================================
       function toggleCheck(el, idx) {
         el.classList.toggle("checked");
         dashboardData.checklists[idx].checked =
@@ -1272,9 +1629,6 @@
         btn.classList.add("active");
       }
 
-      // ==============================================
-      // 4. 스크롤 상단 버튼
-      // ==============================================
       (function () {
         const btn = document.getElementById("scroll-top-btn");
         window.addEventListener(
@@ -1286,12 +1640,21 @@
         );
       })();
 
-      // ==============================================
-      // 5. 초기화
-      // ==============================================
       document.addEventListener("DOMContentLoaded", () => {
         new DashboardRenderer(dashboardData).init();
       });
+
+      // ── 아코디언 ──
+      document.querySelectorAll(".dash-card").forEach(function (card) {
+        card
+          .querySelector(".card-header")
+          .addEventListener("click", function () {
+            card.classList.toggle("open");
+          });
+      });
+      // 첫 번째 카드(공지사항) 기본 열림
+      var firstCard = document.querySelector(".dash-card");
+      if (firstCard) firstCard.classList.add("open");
     </script>
   </body>
 </html>
